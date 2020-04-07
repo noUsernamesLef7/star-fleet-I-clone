@@ -7,5 +7,16 @@
     <groupId>star.fleet.I.clone</groupId>
     <artifactId>StarFleetIClone</artifactId>
     <version>0.1</version>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.hexworks.zircon</groupId>
+            <artifactId>zircon.core-jvm</artifactId>
+            <version>2020.0.2-PREVIEW</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hexworks.zircon</groupId>
+            <artifactId>zircon.jvm.swing</artifactId>
+            <version>2020.0.2-PREVIEW</version>
+        </dependency>
+    </dependencies>
 </project>
