@@ -1,6 +1,7 @@
 package views;
 
 import org.hexworks.zircon.api.Components;
+import org.hexworks.zircon.api.Functions;
 import org.hexworks.zircon.api.component.Button;
 import org.hexworks.zircon.api.component.ColorTheme;
 import org.hexworks.zircon.api.component.Header;
@@ -37,7 +38,6 @@ public class MainMenu extends BaseView {
             .withPosition(8, 3)
             .build();
 
-    // Not implemented yet
     public Button serviceButton = Components.button()
             .withText("S")
             .withPosition(3,4)
@@ -48,7 +48,6 @@ public class MainMenu extends BaseView {
             .withPosition(8, 4)
             .build();
 
-    // Not implemented yet
     public Button promotionButton = Components.button()
             .withText("P")
             .withPosition(3, 5)
@@ -59,7 +58,6 @@ public class MainMenu extends BaseView {
             .withPosition(8, 5)
             .build();
 
-    // Not implemented yet
     public Button personnelButton = Components.button()
             .withText("F")
             .withPosition(3, 6)
@@ -70,7 +68,6 @@ public class MainMenu extends BaseView {
             .withPosition(8, 6)
             .build();
 
-    // Not implemented yet
     public Button otherButton = Components.button()
             .withText("A")
             .withPosition(3, 7)
@@ -81,7 +78,6 @@ public class MainMenu extends BaseView {
             .withPosition(8, 7)
             .build();
 
-    // Not implemented yet
     public Button universeButton = Components.button()
             .withText("T")
             .withPosition(3,8)
@@ -102,7 +98,6 @@ public class MainMenu extends BaseView {
             .withPosition(8, 9)
             .build();
 
-    // Not implemented yet
     public Button maintenanceButton = Components.button()
             .withText("M")
             .withPosition(3, 10)
@@ -125,6 +120,7 @@ public class MainMenu extends BaseView {
 
     public MainMenu(@NotNull TileGrid tileGrid, @NotNull ColorTheme theme) {
         super(tileGrid, theme);
+        // Add all MainMenu Components to the screen
         getScreen().addComponent(optionHeader);
         getScreen().addComponent(purposeHeader);
         getScreen().addComponent(headerLine);
@@ -146,5 +142,38 @@ public class MainMenu extends BaseView {
         getScreen().addComponent(maintenanceLabel);
         getScreen().addComponent(exitButton);
         getScreen().addComponent(exitLabel);
+
+        // Event Handlers for button Components
+        newButton.onActivated(Functions.fromConsumer(componentEvent -> {
+            PlayView playView = new PlayView(tileGrid, theme);
+            replaceWith(playView);
+        }));
+        serviceButton.onActivated(Functions.fromConsumer(componentEvent -> {
+            ServiceView serviceView = new ServiceView(tileGrid, theme);
+            replaceWith(serviceView);
+        }));
+        promotionButton.onActivated(Functions.fromConsumer(componentEvent -> {
+            PromotionView promotionView = new PromotionView(tileGrid, theme);
+            replaceWith(promotionView);
+        }));
+        personnelButton.onActivated(Functions.fromConsumer(componentEvent -> {
+            PersonnelView personnelView = new PersonnelView(tileGrid, theme);
+            replaceWith(personnelView);
+        }));
+        // @TODO make this button allow you to choose a different service record to view
+        otherButton.onActivated(Functions.fromConsumer(componentEvent -> {
+            ServiceView serviceView = new ServiceView(tileGrid, theme);
+            replaceWith(serviceView);
+        }));
+        // @TODO Make this button play song
+        //universeButton.onActivated()
+        // @TODO Make this button allow you to resume from a saved game
+        resumeButton.onActivated(Functions.fromConsumer(componentEvent -> {
+            PlayView playView = new PlayView(tileGrid, theme);
+            replaceWith(playView);
+        }));
+        // @TODO Make this button replicate the option from DOS game
+        //maintenanceButton.onActivated()
+        exitButton.onActivated(Functions.fromConsumer((componentEvent -> System.exit(0))));
     }
 }
